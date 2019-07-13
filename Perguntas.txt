@@ -1,0 +1,21 @@
+﻿Responda as perguntas abaixo sobre Python
+
+1 - Como trocar o valor de duas variáveis em uma única linha de código?
+
+2 - O que são "function decorators" e para que servem?
+
+3 - Quais as principais diferenças entre Python 2 e 3?
+
+4 - Python é interpretado ou compilado?
+
+5 - Porque usar virtualenv?
+
+6 - Que modulos/funções de rede você usaria para:
+	6.1 - Gerar um ataque com pacotes hackeados
+	6.2 - Fazer um POST em um servidor HTTP
+	6.3 - Fazer o Parse de um documento HTML
+
+7 - Mencione um framework em Python que permite agendar e disparar funções assincronamente para múltiplos processos.
+
+8 - No Django, que estratégia você usa para diferenciar os "settings" de produção e de desenvolvimento? 
+
