@@ -5,6 +5,12 @@ class User:
     def __init__(self):
         self.ttask = 5
 
+    def __str__(self):
+        return 'User'
+
+    def __repr__(self):
+        return 'User'
+
     def run_task(self):
         self.ttask -= 1
 

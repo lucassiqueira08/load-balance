@@ -2,9 +2,16 @@
 
 
 class Server:
-    def __init__(self):
+    def __init__(self, server_num=0):
         self.connected_users = []
         self.umax = 10
+        self.server_num = server_num + 1
+
+    def __str__(self):
+        return f'Server {self.server_num}'
+
+    def __repr__(self):
+        return f'Server {self.server_num}'
 
     def add_user(self, user):
         if len(self.connected_users) < self.umax:
