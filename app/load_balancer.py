@@ -5,7 +5,8 @@ from app.user import User
 
 class LoadBalancer:
     def __init__(self):
-        self.file = open('app/data/input1.txt', 'r')
+        # TODO: Não esquecer de mudar o arquivo para input1
+        self.file = open('app/data/input2.txt', 'r')
         self.users_per_clock_ticks = [int(line.replace('\n', '')) for line in self.file.readlines()]
         self.file.close()
 
@@ -15,34 +16,37 @@ class LoadBalancer:
 
     def start(self):
 
-        while self.clock_tick < (len(self.users_per_clock_ticks) + 5):
-
+        # TODO: Não esquecer de trocar de 4 para 5
+        while self.clock_tick < (len(self.users_per_clock_ticks) + 4):
             # Gerencia os usuarios
             if self.clock_tick < len(self.users_per_clock_ticks) and self.users_per_clock_ticks[self.clock_tick] > 0:
                 self.user_manager(self.users_per_clock_ticks[self.clock_tick])
 
-            # Roda as tasks para todos os servidores
+            # Roda as tasks para todos os servidores e retira usuarios que já executaram as tasks
             for server in self.servers:
                 server.run_tasks()
 
-            # Retira os usuarios que já executaram as tasks
-            # Todo: Retirar os usuarios que já executarm as taskas
+            # Remover os servidores que não estão sendo utilizados
+            for server in self.servers:
+                if server.users_online() == 0:
+                    self.servers.remove(server)
 
             # Remaneja os usuarios para liberar espaço
-            # Todo: Remanejar usuarios para liberar espaço
-
-            # Remover os servidores que não estão sendo utilizados
-            # Todo: Remover os servidores que não estão sendo utilizados
+            self.balance_servers()
 
             # Faz o Log no arquivo
             # TODO: Faz o Log da Linha
+
+            # Calcula o custo
+            self.sum_cost()
+            print('*' * 10 + '\n')
 
             # Passa o tempo
             self.clock_tick += 1
 
         # Calcula o custo total
-        total_cost = self.calculate_total_cost()
-
+        print('-' * 20)
+        print(f'Total Cost: ${self.total_cost}')
         # Faz o log final com o valor do custo total
         # TODO: Faz o Log do custo total
 
@@ -60,9 +64,7 @@ class LoadBalancer:
         remaining_users = self.add_user_to_existent_server(user_count)
 
         if remaining_users > 0:
-            remaining_users = self.add_user_to_new_server(user_count)
-            if remaining_users > 0:
-                self.user_manager(remaining_users)
+            self.add_user_to_new_server(remaining_users)
 
     def add_user_to_existent_server(self, user_count):
         """
@@ -96,8 +98,7 @@ class LoadBalancer:
         Numero de usuários remanescentes
 
         """
-        server_num = len(self.servers)
-        server = Server(server_num)
+        server = Server()
         while server.available_server() is True and user_count > 0:
             server.add_user(User())
             user_count -= 1
@@ -105,6 +106,13 @@ class LoadBalancer:
         self.servers.append(server)
         return user_count
 
-    def calculate_total_cost(self):
-        # TODO: Faz o calculo do valor total levando em conta que o preço do clock é $1.00
-        return True
+    def balance_servers(self):
+        pass
+
+    def sum_cost(self):
+        print(f'Clock {self.clock_tick}')
+        for server in self.servers:
+            if server.users_online():
+                self.total_cost += 1
+            print(f'{server} - {server.users_online()}')
+        return self.total_cost

@@ -1,17 +1,19 @@
 # coding: utf-8
+from random import randint
 
 
 class Server:
-    def __init__(self, server_num=0):
+    def __init__(self):
         self.connected_users = []
-        self.umax = 10
-        self.server_num = server_num + 1
+        # TODO: Mudar umax para 10
+        self.umax = 2
+        self.fake_name = f'i-{randint(1, 9)}{randint(1, 9)}{randint(1, 9)}{randint(1, 9)}'
 
     def __str__(self):
-        return f'Server {self.server_num}'
+        return f'Server {self.fake_name}'
 
     def __repr__(self):
-        return f'Server {self.server_num}'
+        return f'Server {self.fake_name}'
 
     def add_user(self, user):
         if len(self.connected_users) < self.umax:
@@ -26,6 +28,9 @@ class Server:
         if self.umax - len(self.connected_users) > 0:
             return True
         return False
+
+    def users_online(self):
+        return len(self.connected_users)
 
     def run_tasks(self):
         for user in self.connected_users:
