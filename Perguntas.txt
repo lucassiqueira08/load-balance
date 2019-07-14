@@ -2,20 +2,68 @@
 
 1 - Como trocar o valor de duas variáveis em uma única linha de código?
 
+    É possível trocar o valor de duas variáveis na mesma linha com atribuição múltipla ou utilizando um ';' para separar-las.
+    Exemplo:
+        a, b = 10, 20
+        x = 0; y = 2
+
+
 2 - O que são "function decorators" e para que servem?
+
+    Decorators são funções encapsuladas que permitem modificar o comportamento padrão de um objeto, estendendo
+    o comportamento da função envolvida é possível agregar responsabilidades a um objeto de forma flexível e sem
+    grandes modificações de código.
+
 
 3 - Quais as principais diferenças entre Python 2 e 3?
 
+    Algumas diferenças de sintaxe, porém as principais diferenças são o print, que se tornou uma function no python 3,
+    algumas modificações no retorno de funções built-in e que no Python3 as strings são unicodes por padrão e não
+    precisam de prefixos.
+
 4 - Python é interpretado ou compilado?
+
+    Python é uma linguagem interpretada de alto nível, as execuções do python passam por interpretadores antes de serem
+    executadas pela máquina, o que é diferente de linguagens como C, em que os códigos fontes são compilados e transformados
+    em linguagem de máquina.
 
 5 - Porque usar virtualenv?
 
+    Virtualenv são importantes para isolar o ambiente de desenvolvimento do restante da máquina, as dependências
+    do projeto não são influenciadas pelo ambiente externo o que possibilita trabalhar em mais de um projeto de forma
+    independente.
+
 6 - Que modulos/funções de rede você usaria para:
 	6.1 - Gerar um ataque com pacotes hackeados
+        Não sei responder.
+
 	6.2 - Fazer um POST em um servidor HTTP
+	    Para realizar um POST apenas com python, utilizaria o Requests, funcional e torna a experiência com HTTP Requests
+	    muito mais simples.
+
 	6.3 - Fazer o Parse de um documento HTML
+	    Utilizaria o html.parser do próprio python.
 
 7 - Mencione um framework em Python que permite agendar e disparar funções assincronamente para múltiplos processos.
 
+    Celery - Permite executar e agendar tarefas assíncronas baseadas em filas de mensagens, possibilita que você delegue tarefas
+    para diferentes workers e pode atuar com múltiplos Message Brokers também.
+
 8 - No Django, que estratégia você usa para diferenciar os "settings" de produção e de desenvolvimento? 
 
+    Uma estratégia é separar em arquivos diferentes e dependendo do ambiente em que o deploy será realizado, um settings específico
+    será apontado. É possível criar um arquivo base em que contenha as informações genéricas, que podem ser acessadas em todos os
+    ambientes, em seguida cria-se os arquivos dos respectivos ambientes, estendendo o base e acrescentando apenas informações respectivas aquele ambiente.
+
+    Exemplo:
+
+    [projectname]/
+    ├── [projectname]/
+    │   ├── __init__.py
+    │   ├── settings/
+    |   |────── base.py
+    |   |────── prod.py
+    |   |────── dev.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    └── manage.py
