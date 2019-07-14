@@ -1,12 +1,12 @@
 # coding: utf-8
+
 from random import randint
 
 
 class Server:
     def __init__(self):
         self.connected_users = []
-        # TODO: Mudar umax para 10
-        self.umax = 2
+        self.umax = 10
         self.fake_name = f'i-{randint(1, 9)}{randint(1, 9)}{randint(1, 9)}{randint(1, 9)}'
 
     def __str__(self):
